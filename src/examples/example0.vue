@@ -6,14 +6,14 @@
     <p>Web development is made up of three major parts:</p>
 
     <ul>
-      <li>
+      <li class="super-duper-font">
         HTML: Outlines the content of a web page and defines its structure and
         hierarchy.
       </li>
       <li>
         CSS: Defines the style of html elements (ex. color, fonts, spacings)
       </li>
-      <li>JavaScript: Adds interactivity and dynamic behavior.</li>
+      <li class="super-duper-font">JavaScript: Adds interactivity and dynamic behavior.</li>
     </ul>
 
     <br />
@@ -59,8 +59,11 @@ const getRandomColor = () => {
 
 const changeTitleColor = () => {
   const titleElement = document.getElementById("title");
+  const body = document.getElementById("body");
   let newColor = getRandomColor();
+  let newBGColor = getRandomColor();
   titleElement.style.color = newColor;
+  body.style.backgroundColor = newBGColor;
 
   //Add console.logs to see what's happening
   console.log("Change color", newColor);
@@ -87,5 +90,12 @@ const changeTitleColor = () => {
 }
 .myButton:hover {
   cursor: pointer;
+}
+
+.super-duper-font {
+  font-family:fantasy;
+  font-size: x-large;
+  font-style: italic;
+  font-weight: 900;
 }
 </style>

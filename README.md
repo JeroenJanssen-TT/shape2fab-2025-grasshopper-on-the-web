@@ -38,6 +38,9 @@ When you have Rhino.Compute running, have a look at the number of the localhost.
 
 If your Rhino.Compute localhost number is different, adjust `compute.js` file to match it. 
 
+Load locally without Rhino and GH
+In terminal:
+`./rhino.compute.exe --spawn-on-startup`
 
 ### Run front-end
 

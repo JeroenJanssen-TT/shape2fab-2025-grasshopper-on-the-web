@@ -6,15 +6,39 @@ import Dropdown from "../components/Dropdown.vue"
 import MetadataTextBox from "@/components/MetadataTextBox.vue"
 
 //define path to grasshopper script
-import def from "../assets/wall.gh"
+import def from "../assets/wallJJ.gh"
 const path = def
 
+// declare inputs here:
+const heightSliderName = ref("Height")
+const heightSliderValue = ref(17)
+
+const widthSliderName = ref("Width")
+const widthSliderValue = ref(33)
+
+const verticalRotationSliderName = ref("Vertical Rotation")
+const verticalRotationSliderValue = ref(0)
+
+const horizontalRotationSliderName = ref("Horizontal Rotation")
+const horizontalRotationSliderValue = ref(0)
+
+const shapeTypeDropDownName = ref("Shape Type")
+const shapeTypeIndex = ref(1)
+const dropdownOptions = ref([
+  {label: "Standard", value: 0},
+  {label: "Concave", value: 1},
+  {label: "Convex", value: 2}
+])
 
 let metadata = ref([])
 
 //Put all inputs together to send them to Rhino.Compute
 let inputs = ref({
-
+  [heightSliderName.value]: heightSliderValue.value,
+  [widthSliderName.value]: widthSliderValue.value,
+  [verticalRotationSliderName.value]: verticalRotationSliderValue.value,
+  [horizontalRotationSliderName.value]: horizontalRotationSliderValue.value,
+  [shapeTypeDropDownName.value]: shapeTypeIndex.value
 });
 
 function updateValue(newValue, parameterName) {
@@ -37,12 +61,49 @@ function receiveMetadata(newValue) {
 
   <div id="sidebar">
 
-    <!-- <MetadataTextBox :metadata="metadata"></MetadataTextBox> -->
+    <Slider :title = heightSliderName
+    min = "1"
+    max = "20"
+    step = "1"
+    :value = heightSliderValue
+    @update = "updateValue"
+    ></Slider>
+
+    <Slider :title = widthSliderName
+    min = "1"
+    max = "40"
+    step = "1"
+    :value = widthtSliderValue
+    @update = "updateValue"
+    ></Slider>
+
+    <Slider :title = verticalRotationSliderName
+    min = "1"
+    max = "30"
+    step = "1"
+    :value = verticalRotationSliderValue
+    @update = "updateValue"
+    ></Slider>
+
+    <Slider :title = horizontalRotationSliderName
+    min = "1"
+    max = "30"
+    step = "1"
+    :value = horizontalRotationSliderValue
+    @update = "updateValue"
+    ></Slider>
+
+    <Dropdown :title=shapeTypeDropDownName
+    :options=dropdownOptions
+    :value=shapeTypeIndex
+    @update = "updateValue"></Dropdown>
+
+    <MetadataTextBox :metadata="metadata"></MetadataTextBox>
   
   </div>
 
   <div id="viewer">
-    <!-- <GeometryView :data="inputs" :path="path" @updateMetadata="receiveMetadata"></GeometryView> -->
+    <GeometryView :data="inputs" :path="path" @updateMetadata="receiveMetadata"></GeometryView>
   </div>
 
 </template>
